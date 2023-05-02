@@ -8,6 +8,7 @@ export const metadata = {
   title: "SummizeMe | Article Summarizer",
   description:
     "Effortlessly summarize articles with our AI-powered tool. Extract key insights in seconds and streamline your reading experience. Make reading more efficient with our innovative solution.",
+  icons: { icon: "logo.png" },
 };
 
 export default function RootLayout({
