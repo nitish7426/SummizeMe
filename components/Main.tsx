@@ -1,10 +1,7 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { AiOutlineLink } from "react-icons/ai";
-import { URL } from "url";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
-import Spinner from "./Spinner";
 import SummaryBox from "./SummaryBox";
 import Loader from "./Loader";
 
@@ -37,8 +34,9 @@ const Main = () => {
     } catch (error: any) {
       setIsError(true);
       console.log(error.message);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -49,7 +47,7 @@ const Main = () => {
   return (
     <div className="max-w-4xl mx-auto px-6 sm:px-16 space-y-4">
       <form onSubmit={handleSubmit}>
-        <div className="relative flex items-center border rounded-lg border-gray-300 dark:border-gray-600">
+        <div className="relative flex items-center max-w-xl mx-auto border rounded-lg border-gray-300 dark:border-gray-600">
           <AiOutlineLink
             className="ml-2 text-gray-500 dark:text-gray-400"
             size={25}
@@ -74,6 +72,10 @@ const Main = () => {
       {loading ? (
         <div className="flex justify-center">
           <Loader />
+        </div>
+      ) : isError ? (
+        <div className="text-center font-medium">
+          Sorry something went wrong.
         </div>
       ) : (
         summary && <SummaryBox text={summary} />
